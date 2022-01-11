@@ -1,51 +1,114 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  StyleSheet,
   View,
-  Text,
+  StyleSheet,
   Button,
+  Modal,
+  Image,
+  Text,
+  TouchableOpacity,
+  Animated,
 } from 'react-native';
 
-const App = () => {
-  const [name, setName] = useState('React Native!')
-
-  const onClickHandler = () => {
-    setName('Test is Done!')
-  }
-
+const ModalPoup = ({visible, children}) => {
+  const [showModal, setShowModal] = React.useState(visible);
+  const scaleValue = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    toggleModal();
+  }, [visible]);
+  const toggleModal = () => {
+    if (visible) {
+      setShowModal(true);
+      Animated.spring(scaleValue, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      setTimeout(() => setShowModal(false), 200);
+      Animated.timing(scaleValue, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
   return (
-    <View style={styles.body}>
-      <Text style={styles.text}>{name}</Text>
-      <View style={styles.button}>
-        <Button title='Update State' onPress={onClickHandler} style={styles.button}></Button>
+    <Modal transparent visible={showModal}>
+      <View style={styles.modalBackGround}>
+        <Animated.View
+          style={[styles.modalContainer, {transform: [{scale: scaleValue}]}]}>
+          {children}
+        </Animated.View>
       </View>
+    </Modal>
+  );
+};
+
+const App = () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ModalPoup visible={visible}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setVisible(false)}>
+              <Image
+                source={require('./assets/x.png')}
+                style={{height: 30, width: 30}}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('./assets/refresh.png')}
+            style={{height: 150, width: 150, marginVertical: 10}}
+          />
+        </View>
+
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
+          Are you sure to Update?
+        </Text>
+        <Button title="Update Now" color="#68BB49" onPress={() => setVisible(true)} />
+        
+        <View>
+          <Text style={{fontFamily: 'Anuphan-Regular'}}></Text>
+          <Button style={{fontFamily: 'Anuphan-Regular'}} title="Not Now" color="#D7DBDD" onPress={() => setVisible(true)} />
+        </View>
+
+      </ModalPoup>
+
+      <Button title="Update" onPress={() => setVisible(true)}/>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  body: {
-    flex:1,
-    backgroundColor: '#E7E7E7',
-    alignItems: 'center',
+  modalBackGround: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
-    borderWidth: 10,
-    borderColor: '#000000',
-    borderRadius: 10,
+    alignItems: 'center',
   },
-  text: {
-    color:'#000000',
-    fontSize: 40,
-    fontStyle: 'italic',
-    margin: 10,
-    textTransform: 'uppercase',
-
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
+  },
+  header: {
+    width: '100%',
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   button:{
     width: 200,
     height: 60,
   }
-
 });
 
 export default App;
