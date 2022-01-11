@@ -73,7 +73,7 @@ const App = () => {
         <Button title="Update Now" color="#68BB49" onPress={() => setVisible(true)} />
         
         <View>
-          <Text style={{fontFamily: 'Anuphan-Regular'}}></Text>
+          <Text style={{fontFamily: 'Anuphan-Regular'}}>Hello</Text>
           <Button style={{fontFamily: 'Anuphan-Regular'}} title="Not Now" color="#D7DBDD" onPress={() => setVisible(true)} />
         </View>
 
