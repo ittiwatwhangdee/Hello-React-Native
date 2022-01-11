@@ -63,18 +63,18 @@ const App = () => {
         <View style={{alignItems: 'center'}}>
           <Image
             source={require('./assets/refresh.png')}
-            style={{height: 150, width: 150, marginVertical: 10}}
+            style={{height: 100, width: 100, marginVertical: 10}}
           />
         </View>
 
-        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
-          Are you sure to Update?
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center' ,fontFamily: 'Anuphan-Regular'}}>
+          คุณจะอัพเดทหรือไม่?
         </Text>
-        <Button title="Update Now" color="#68BB49" onPress={() => setVisible(true)} />
+        <Button title="อัพเดทตอนนี้" color="#68BB49" onPress={() => setVisible(true)} />
         
         <View>
-          <Text style={{fontFamily: 'Anuphan-Regular'}}>Hello</Text>
-          <Button style={{fontFamily: 'Anuphan-Regular'}} title="Not Now" color="#D7DBDD" onPress={() => setVisible(true)} />
+          <Text></Text>
+          <Button style={styles.buttonText} title="ภายหลัง" color="#D7DBDD" onPress={() => setVisible(true)} />
         </View>
 
       </ModalPoup>
@@ -105,10 +105,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
-  button:{
-    width: 200,
-    height: 60,
-  }
+  buttonText: {
+    fontFamily: 'Anuphan-Regular'
+  },
 });
 
 export default App;
