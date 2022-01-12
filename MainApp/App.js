@@ -1,13 +1,50 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button, TouchableOpacity, Image} from 'react-native';
 
 export default function App() {
   return (
-    <View style={{flex: 1, backgroundColor: '#FF0', flexDirection: 'column', alignItems:'center'}}>
-      <Text style={{backgroundColor: '#f00', flex: 1, width: 100, textAlign: 'center', textAlignVertical: 'center'}}>CodeMobiles 1#</Text>
-      <Text style={{backgroundColor: '#f0f', flex: 1,width: 200, textAlign: 'center'}}>CodeMobiles 1#</Text>
-      <Text style={{backgroundColor: '#10f', flex: 1,width: 300, textAlign: 'center'}}>CodeMobiles 1#</Text>
-      <Text style={{backgroundColor: '#80f', flex: 1,width: '100%', textAlign: 'center'}}>CodeMobiles 1#</Text>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Button title="clickMe1" onPress={() => alert('Hey1')}></Button>
+      <View style={{height: 24}}></View>
+      <Button
+        title="clickMe2"
+        onPress={() => {
+          console.log('Hey1');
+          console.log('Hey1');
+        }}></Button>
+      <View style={{marginTop: 24}}>
+        <Button title="clickMe3" onPress={() => alert('Hey3')}></Button>
+      </View>
+
+      <TouchableOpacity
+        activeOpacity={0.3}
+        onPress={() => alert('Hey')}
+        style={{
+          marginTop: 24,
+          borderColor: 'red',
+          borderWidth: 1,
+          padding: 24,
+          borderRadius: 10,
+        }}>
+        <Text>RUN</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        activeOpacity={0.3}
+        onPress={() => alert('Hey')}
+        style={{
+          marginTop: 24,
+          borderColor: 'gray',
+          borderWidth: 1,
+          borderRadius: 5,
+        }}>
+        <Image
+          style={{width: 200, height: 200}}
+          resizeMode="contain"
+          source={{
+            uri: 'https://1757140519.rsc.cdn77.org/blog/wp-content/uploads/2018/05/1-google-logo.png',
+          }}></Image>
+      </TouchableOpacity>
     </View>
   );
 }
